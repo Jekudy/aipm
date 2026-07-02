@@ -5,8 +5,15 @@
 ## The picture
 A PM says: *"есть сигнал X, я знаю то-то"* and invokes the plugin. The plugin assembles a draft doc, says **what's missing** and what to find out, offers help forming tasks for the PM and the analyst. The PM does that work **outside** the plugin, returns, re-invokes. The plugin re-assembles the doc, scores readiness, offers to raise quality or promote to backlog. Several passes. Then the same shape for the Solution. Then, at quarter end: *"давай спланируем квартал"* — decompose into waves, pick activities (signal research / Opp Doc / Solution Doc / build+A/B / research), check the quarter yields expected impact with sane capacity.
 
+## Mega-scenarios (North Star)
+1. У продакта нет достаточно качественного **Opportunity Doc** — он хочет его получить.
+2. У продакта нет достаточно качественного **PRD** — он хочет его получить (PRD = зрелый Solution Doc).
+3. У продакта нет поспринтово корректно спланированного **квартала для диско** — он хочет его получить.
+
+Entry scenarios (~10: плохой/неполный opp doc, сигнал, каша в голове, уточнение беклога, идея решения, идея для существующей возможности, слабый solution doc, сразу PRD при незрелом солюшне, квартал без инициатив) all reduce to **one router pattern**: diagnose where the PM is in the cycle → route to a module.
+
 ## Scope
-- **In:** from **signal received** → **quarter planned**. Five components: Context collection, Opp Doc, Solution Doc, Backlog manager, Planning.
+- **In:** from **signal received** → **quarter planned**. Seven modules: Architecture & contracts, Context collection, Opp Doc, Opp Backlog, Solution Doc (→PRD), Solution Backlog, Planning.
 - **Out (other teams):** prototyping; the AI-analyst. We may consume both.
 
 ## What must be true (the cubes)

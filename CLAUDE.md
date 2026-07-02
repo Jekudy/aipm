@@ -28,13 +28,19 @@ docs/
   github-project.md          ← tracking = GitHub Project #5 (axis M)
   boardmix.md                ← workflow visualization (repo → board render)
   reference-digest.md        ← cited real-practice grounding + critique changelog
-components/
-  opp-doc/SPEC.md            ← ACTIVE (M1): 12-section container + Q-rubric + white-spots
+components/                  ← one dir per module (Architecture module's spec = docs/architecture.md)
+  opp-doc/SPEC.md            ← ACTIVE (M1, Track B): 12-section container + Q-rubric + white-spots
   context-collection/SPEC.md ← coarse M0 stub
-  solution-doc/SPEC.md       ← coarse M0 stub
-  backlog-manager/SPEC.md    ← coarse M0 stub
+  solution-doc/SPEC.md       ← coarse M0 stub (target output = PRD)
+  opp-backlog/SPEC.md        ← coarse M0 stub
+  solution-backlog/SPEC.md   ← coarse M0 stub
   planning/SPEC.md           ← coarse M0 stub
 ```
+
+## Inter-module model (2026-07-02)
+- **3 mega-scenarios** (North Star) + ~10 entry scenarios reducing to one router pattern — see `STATE.md#Mega-scenarios`.
+- **lvl ⟂ M ⟂ Q**: lvl = scope contract of a module version (in SPEC); M = build-state of current lvl (GitHub Project); Q = output quality (runtime rubric).
+- **Этап N** = wave with a FOCUS subset of modules at target lvls. Этап 1 = Architecture lvl1 ∥ Opp Doc lvl1.
 
 ## Language policy
 - **PM-facing output = Russian**: gap reports, targeted questions, Q-rubric descriptors the PM reads, gap-report template. End users are Russian-speaking Avito PMs.
