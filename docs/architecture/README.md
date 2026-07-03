@@ -6,9 +6,10 @@
 
 ## документы
 
+- [`full-context-v0.4.md`](./full-context-v0.4.md) — максимально полный контекст разговора: все важные решения, развилки, поправки, ограничения и фазы.
+- [`decision-log-v0.1.md`](./decision-log-v0.1.md) — компактный список принятых архитектурных решений.
 - [`ai-pm-plugin-handoff-v0.3.md`](./ai-pm-plugin-handoff-v0.3.md) — полный handoff-контекст: что строим, какие решения приняли, какие anti-goals, какие модули и системные слои.
 - [`phase-1-opp-doc-module-v0.1.md`](./phase-1-opp-doc-module-v0.1.md) — первый инкремент: mock context + router lite + opp doc module + mock backlog-и.
-- [`architecture-backlog-next-sessions.md`](./architecture-backlog-next-sessions.md) — backlog следующих архитектурных сессий, open questions, симуляции и evals.
 
 ## суть проекта в одну строчку
 
@@ -28,3 +29,14 @@
 8. что должен подтвердить pm?
 
 только после этого плагин генерирует, ревьюит, обновляет документы или двигает item дальше.
+
+## следующие шаги
+
+1. зафиксировать phase 1 scope.
+2. описать entity and state model v0.1.
+3. описать canonical flow для opp doc.
+4. описать router lite.
+5. описать maturity model для opp-r0/r1/r2/r3.
+6. описать specialist specs для phase 1.
+7. описать mock backlog behavior.
+8. подготовить simulation cases.
