@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>opportunity doc plugin — connected mvp flow</title>
+  <style>
+    :root { --bg:#f6f7f9; --panel:#fff; --ink:#101828; --muted:#667085; --line:#e4e7ec; --blue:#2563eb; --blueSoft:#eff6ff; --amber:#d97706; --amberSoft:#fffbeb; --green:#059669; --greenSoft:#ecfdf3; --red:#dc2626; --redSoft:#fef2f2; --violet:#7c3aed; --violetSoft:#f5f3ff; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background:var(--bg); color:var(--ink); }
+    .wrap { max-width:1180px; margin:0 auto; padding:28px; }
+    h1 { margin:0 0 8px; font-size:28px; letter-spacing:-0.03em; }
+    h2 { margin:0 0 12px; font-size:18px; letter-spacing:-0.02em; }
+    h3 { margin:0 0 8px; font-size:15px; }
+    p { margin:0 0 10px; line-height:1.5; }
+    .muted { color:var(--muted); }
+    .hero { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:22px; }
+    .badge { display:inline-flex; align-items:center; border:1px solid var(--line); background:var(--panel); border-radius:999px; padding:6px 10px; font-size:12px; color:var(--muted); }
+    .journey { display:grid; grid-template-columns: repeat(5, 1fr); gap:10px; margin:18px 0 24px; }
+    .step { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:14px; cursor:pointer; min-height:112px; }
+    .step.active { border-color:var(--blue); box-shadow:0 0 0 3px var(--blueSoft); }
+    .step .num { color:var(--muted); font-size:12px; margin-bottom:8px; }
+    .step strong { display:block; font-size:14px; margin-bottom:6px; }
+    .step small { color:var(--muted); line-height:1.35; display:block; }
+    .grid { display:grid; grid-template-columns: 1.2fr 0.8fr; gap:18px; align-items:start; }
+    .panel { background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:18px; box-shadow:0 1px 2px rgba(16,24,40,.04); }
+    .topline { display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; margin-bottom:16px; }
+    .metric { border:1px solid var(--line); border-radius:14px; padding:12px; background:#fcfcfd; }
+    .metric span { display:block; font-size:12px; color:var(--muted); margin-bottom:4px; }
+    .metric b { font-size:14px; }
+    .pill { display:inline-flex; font-size:12px; border-radius:999px; padding:4px 8px; margin:0 6px 6px 0; border:1px solid var(--line); background:#fff; }
+    .r0 { background:var(--amberSoft); color:#92400e; border-color:#fde68a; }
+    .r1 { background:var(--blueSoft); color:#1d4ed8; border-color:#bfdbfe; }
+    .r2 { background:var(--greenSoft); color:#047857; border-color:#a7f3d0; }
+    .warn { background:var(--redSoft); color:#b91c1c; border-color:#fecaca; }
+    .violet { background:var(--violetSoft); color:#6d28d9; border-color:#ddd6fe; }
+    .tabs { display:flex; gap:8px; border-bottom:1px solid var(--line); margin:16px 0 14px; overflow:auto; }
+    .tab { border:0; background:transparent; padding:10px 10px 12px; cursor:pointer; color:var(--muted); font-weight:700; border-bottom:2px solid transparent; }
+    .tab.active { color:var(--blue); border-bottom-color:var(--blue); }
+    .tabContent { display:none; }
+    .tabContent.active { display:block; }
+    .doc { background:#fcfcfd; border:1px solid var(--line); border-radius:14px; padding:14px; }
+    .doc h4 { margin:12px 0 6px; font-size:12px; text-transform:uppercase; color:var(--muted); letter-spacing:.04em; }
+    .doc h4:first-child { margin-top:0; }
+    .list { margin:8px 0 0; padding-left:20px; }
+    .list li { margin:6px 0; line-height:1.45; }
+    .task { border:1px solid var(--line); border-radius:14px; padding:14px; margin:10px 0; background:#fff; }
+    .task .role { font-size:12px; color:var(--muted); margin-bottom:8px; }
+    .flowArrow { text-align:center; color:var(--muted); font-size:22px; padding:6px 0; }
+    .handoff { background:var(--violetSoft); border:1px solid #ddd6fe; border-radius:14px; padding:14px; margin-top:14px; }
+    .cta { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+    button.primary { border:0; background:var(--blue); color:#fff; border-radius:12px; padding:10px 14px; font-weight:800; cursor:pointer; }
+    button.secondary { border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:12px; padding:10px 14px; font-weight:800; cursor:pointer; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+    pre { white-space:pre-wrap; background:#101828; color:#f9fafb; padding:14px; border-radius:14px; font-size:12px; line-height:1.45; overflow:auto; }
+    @media (max-width: 900px) { .journey, .grid, .topline { grid-template-columns:1fr; } .hero { flex-direction:column; } }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <h1>opportunity doc plugin — connected mvp flow</h1>
+        <p class="muted">не три независимых сценария, а один living opp doc journey: solution idea → signal → weak opp doc → gaps/tasks → task result → updated doc.</p>
+      </div>
+      <span class="badge">loops = plugin skills · readiness ≠ priority</span>
+    </section>
+
+    <section class="journey" id="journey"></section>
+
+    <section class="grid">
+      <div class="panel">
+        <div class="topline">
+          <div class="metric"><span>readiness</span><b id="readiness">r0</b></div>
+          <div class="metric"><span>workflow status</span><b id="status">needs input</b></div>
+          <div class="metric"><span>scenario</span><b id="scenario">solution idea</b></div>
+          <div class="metric"><span>next transition</span><b id="transition">r0 → r1</b></div>
+        </div>
+        <h2 id="title">solution idea detox</h2>
+        <p id="summary" class="muted"></p>
+        <div class="cta">
+          <button class="primary" onclick="nextStep()">перейти к следующему шагу</button>
+          <button class="secondary" onclick="resetFlow()">начать сначала</button>
+        </div>
+        <div class="tabs" id="tabs"></div>
+        <div id="tabRoot"></div>
+      </div>
+
+      <aside class="panel">
+        <h2>skills in this flow</h2>
+        <p><span class="pill r1">skill 1</span><b>intake & framing</b></p>
+        <p class="muted">принимает signal / solution idea / weak doc, вытаскивает user, scenario, problem и доводит до r0/r1.</p>
+        <div class="flowArrow">↓</div>
+        <p><span class="pill warn">skill 2</span><b>gap resolution</b></p>
+        <p class="muted">gap analysis → tasks → task result → doc update → gap analysis again.</p>
+        <div class="flowArrow">↓</div>
+        <p><span class="pill violet">quality pass</span><b>human doc quality</b></p>
+        <p class="muted">fact / assumption / unknown, no ai-slop, no delivery language, problem-first rewrite.</p>
+        <hr style="border:0;border-top:1px solid var(--line);margin:18px 0" />
+        <h3>key rules</h3>
+        <ul class="list muted">
+          <li>r0 тоже лежит в opportunity backlog.</li>
+          <li>solution без opportunity заворачивается назад.</li>
+          <li>critical gap не блокирует хранение, но блокирует transition.</li>
+          <li>новые solutions не генерируются проактивно; только если pm просит.</li>
+        </ul>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    const steps = [
+      {
+        name: 'c · solution idea', short: 'идея решения без opportunity', readiness:'r0 solution-signal', status:'needs input', scenario:'solution idea', transition:'r0 → r1',
+        title:'solution idea detox',
+        summary:'pm приходит с “нужно сделать рекомендованную цену”. плагин не принимает это как opportunity, а разворачивает назад к проблеме.',
+        tabs:{
+          'input': `<pre>нужно сделать рекомендованную цену при размещении объявления.</pre>`,
+          'diagnosis': `<p><span class="pill warn">critical gap</span>есть решение, но нет сформулированной opportunity.</p><p><span class="pill r0">r0</span>сохраняем как solution-signal в opportunity backlog.</p>`,
+          'grill me': `<ul class="list"><li>какую проблему это решает?</li><li>у кого эта проблема?</li><li>в каком сценарии?</li><li>как мы знаем, что проблема существует?</li><li>какие ещё решения могли бы решить ту же проблему?</li></ul>`,
+          'handoff': `<div class="handoff"><b>output → next input</b><p>underlying signal: продавцы могут не понимать, какую цену поставить при размещении.</p></div>`
+        }
+      },
+      {
+        name: 'b · raw signal', short: 'сигнал превращается в r0/r1 skeleton', readiness:'r0 / r1 candidate', status:'being framed', scenario:'raw signal', transition:'r0 → r1',
+        title:'raw signal framing',
+        summary:'из detox появился сырой сигнал. плагин задаёт минимальные вопросы и собирает skeleton living opp doc.',
+        tabs:{
+          'skeleton': `<div class="doc"><h4>signal</h4><p>продавцы могут не понимать, какую цену поставить при размещении.</p><h4>problem draft</h4><p>новые продавцы в категории x могут испытывать неуверенность при выборе цены.</p><h4>unknowns</h4><ul class="list"><li>неясен точный сегмент</li><li>неясен affected volume</li><li>неясно, как проблема проявляется в поведении</li></ul></div>`,
+          'gaps': `<p><span class="pill warn">critical</span>не уточнён segment/scenario.</p><p><span class="pill warn">critical</span>нет evidence inventory.</p><p><span class="pill warn">critical</span>нет rough sizing.</p>`,
+          'tasks': `<div class="task"><div class="role">role: pm</div><b>уточнить сегмент и сценарий</b><p class="muted">why: без этого r0 не переходит в r1.</p><p>acceptance criteria: указан segment, scenario, observable behavior.</p></div><div class="task"><div class="role">role: evidence</div><b>найти первичный сигнал в данных или интервью</b><p class="muted">why: без evidence документ остаётся assumption-heavy.</p><p>acceptance criteria: 1–2 источника evidence или explicit unknown.</p></div>`,
+          'handoff': `<div class="handoff"><b>output → next input</b><p>pm отвечает на вопросы и начинает weak opp doc.</p></div>`
+        }
+      },
+      {
+        name: 'a · weak opp doc', short: 'док есть, но он solution-first', readiness:'r1', status:'needs tasks', scenario:'existing weak opp doc', transition:'r1 → r2',
+        title:'weak opp doc review',
+        summary:'pm уже написал opp doc, но он начинается с решения, не содержит sizing и decomposition. плагин делает rewrite + gap diagnosis.',
+        tabs:{
+          'improved doc': `<div class="doc"><h4>compact card</h4><p><b>signal:</b> продавцы проявляют неуверенность при выборе цены.</p><p><b>problem:</b> новые продавцы в категории x не понимают, какую цену поставить при первом размещении.</p><p><b>potential solutions:</b> рекомендованная цена уже упомянута как idea, но не commitment.</p><p><b>readiness:</b> r1 · needs sizing and decomposition.</p><p><b>next step:</b> закрыть 2 critical gaps для перехода r1 → r2.</p><h4>opportunity statement</h4><p>новые продавцы в категории x могут не понимать, какую цену поставить при первом размещении. это может приводить к ошибочным ценам, редактированию объявления после публикации и более долгому ожиданию первых откликов.</p></div>`,
+          'gaps': `<p><span class="pill warn">critical</span>нет rough sizing.</p><p><span class="pill warn">critical</span>нет problem decomposition.</p><p><span class="pill r0">major</span>evidence пока weak / assumption-heavy.</p>`,
+          'tasks': `<div class="task"><div class="role">role: pm</div><b>разложить проблему на 3–5 компонентов</b><p class="muted">why: без decomposition opportunity слишком широкая.</p><p>acceptance criteria: для каждого component указан affected segment/scenario.</p></div><div class="task"><div class="role">role: evidence</div><b>оценить affected volume диапазоном</b><p class="muted">why: без rough sizing нельзя перейти r1 → r2.</p><p>acceptance criteria: range, source, period, confidence.</p></div>`,
+          'claim warnings': `<ul class="list"><li>“многие продавцы” → unsupported claim. заменить на assumption или дать источник.</li><li>“рекомендованная цена улучшит размещение” → solution claim без mechanism.</li><li>“цена влияет на отклики” → нужен evidence/source.</li></ul>`,
+          'handoff': `<div class="handoff"><b>output → next input</b><p>созданы tasks. дальше pm/evidence приносит task results.</p></div>`
+        }
+      },
+      {
+        name: 'loop · task result', short: 'результаты задач возвращаются в doc', readiness:'r2 candidate', status:'ready for gap review', scenario:'task result intake', transition:'r1 → r2',
+        title:'task result intake',
+        summary:'pm/evidence принесли данные. плагин обновляет living opp doc и снова запускает gap analysis.',
+        tabs:{
+          'task results': `<pre>evidence result:
+~80–120k размещений/месяц в категории x имеют признаки ценовой неопределённости.
+proxy: price edit within first 7 days + delayed first response.
+confidence: medium.
+
+pm result:
+components:
+1. не понимают рыночный диапазон
+2. не понимают, как цена влияет на спрос
+3. не знают, когда снижать цену</pre>`,
+          'updated doc': `<div class="doc"><h4>sizing</h4><p>affected volume: ~80–120k размещений/месяц. confidence: medium.</p><h4>decomposition</h4><ul class="list"><li>нет понимания рыночного диапазона</li><li>нет понимания влияния цены на спрос</li><li>нет критерия, когда снижать цену</li></ul><h4>readiness</h4><p>r2 candidate. нужно повторно проверить gaps.</p></div>`,
+          'next analysis': `<p><span class="pill r2">gap analysis again</span>после task result нельзя идти дальше автоматически.</p><p>плагин снова проверяет gaps, claim quality и transition criteria.</p>`,
+          'handoff': `<div class="handoff"><b>output</b><p>updated opp doc + recalculated readiness + backlog card update.</p></div>`
+        }
+      },
+      {
+        name: 'updated card', short: 'readiness пересчитан, card обновлена', readiness:'r2', status:'ready for next step', scenario:'updated opp doc', transition:'r2 → r3 optional',
+        title:'updated opportunity card',
+        summary:'opportunity стала понятнее. решений проактивно не генерируем; если pm попросит — можно проработать solution hypotheses.',
+        tabs:{
+          'backlog card': `<div class="doc"><h4>signal</h4><p>новые продавцы не уверены в цене при первом размещении.</p><h4>problem</h4><p>новые продавцы в категории x не понимают, какую цену поставить, что может приводить к ошибочным ценам и более долгому ожиданию откликов.</p><h4>potential solutions</h4><p>есть existing idea: рекомендованная цена. новые решения не генерируются без запроса pm.</p><h4>priority data</h4><p>volume: high · severity: medium · addressability: medium · strategic fit: high · urgency: low</p><h4>readiness/status</h4><p>r2 · ready for next step</p><h4>next step</h4><p>либо запросить проработку solution hypotheses, либо оставить opportunity в backlog как sized/decomposed.</p></div>`,
+          'remaining gaps': `<p><span class="pill r0">major</span>нужно подтвердить causal link между price edit и неопределённостью цены.</p><p><span class="pill r0">minor</span>нет qualitative quotes.</p>`,
+          'what not to do': `<ul class="list"><li>не превращать recommended price в prd.</li><li>не считать r2 высоким приоритетом автоматически.</li><li>не обещать delivery roadmap.</li></ul>`
+        }
+      }
+    ];
+
+    let current = 0;
+    let activeTab = 0;
+
+    function renderJourney(){
+      const root = document.getElementById('journey');
+      root.innerHTML = steps.map((s,i)=>`<div class="step ${i===current?'active':''}" onclick="setStep(${i})"><div class="num">step ${i+1}</div><strong>${s.name}</strong><small>${s.short}</small></div>`).join('');
+    }
+
+    function render(){
+      const s = steps[current];
+      document.getElementById('readiness').textContent = s.readiness;
+      document.getElementById('status').textContent = s.status;
+      document.getElementById('scenario').textContent = s.scenario;
+      document.getElementById('transition').textContent = s.transition;
+      document.getElementById('title').textContent = s.title;
+      document.getElementById('summary').textContent = s.summary;
+      const keys = Object.keys(s.tabs);
+      activeTab = Math.min(activeTab, keys.length - 1);
+      document.getElementById('tabs').innerHTML = keys.map((k,i)=>`<button class="tab ${i===activeTab?'active':''}" onclick="setTab(${i})">${k}</button>`).join('');
+      document.getElementById('tabRoot').innerHTML = keys.map((k,i)=>`<div class="tabContent ${i===activeTab?'active':''}">${s.tabs[k]}</div>`).join('');
+      renderJourney();
+    }
+    function setStep(i){ current = i; activeTab = 0; render(); }
+    function setTab(i){ activeTab = i; render(); }
+    function nextStep(){ current = Math.min(current + 1, steps.length - 1); activeTab = 0; render(); }
+    function resetFlow(){ current = 0; activeTab = 0; render(); }
+    render();
+  </script>
+</body>
+</html>
