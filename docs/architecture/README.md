@@ -40,3 +40,5 @@
 6. описать specialist specs для phase 1.
 7. описать mock backlog behavior.
 8. подготовить simulation cases.
+
+> **SUPERSEDED (2026-07-04):** source material only. Reconciled canon = `docs/target-solution.md` + `docs/design-log/2026-07-04-reconciliation.md`; on any conflict those win.

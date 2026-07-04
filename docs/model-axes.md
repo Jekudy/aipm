@@ -50,3 +50,22 @@ LAZY / progressive-JPEG decomposition: expand exactly ONE level down, and ONLY f
 - M low / Q high: a PM hand-writes an Opportunity Doc entirely in ChatGPT with real analytics and a falsifiable hypothesis — that DOC is Q4 (validated). But our Planning component that would consume it is still M0 (not-studied, a coarse stub). A high-quality output can exist for a component our tooling hasn't even mapped yet.
 - M high / Q regresses over time: the Solution Doc skill reaches M4 (daily use by 1 PM), and a doc that was Q3 (data-backed) is edited and its evidence section deleted, dropping it to Q1. M is monotonic and stays at M4; Q moved BACKWARD. This is why Q lives in a runtime rubric (content can degrade) and M lives in the GitHub Project (lifecycle only advances) — they cannot be the same axis.
 - Clean-separation test in action: 'is in daily use by 1 PM' could be true of a tool giving wrong answers -> M descriptor (M4). 'core claim expressed as a falsifiable hypothesis with pre-committed pass/fail' could be true of a rough first draft -> Q descriptor (Q4). Neither can be swapped to the other axis without collapsing the two into one.
+
+## r — work-item readiness (addendum, 2026-07-04; ADDITIVE — nothing above is modified)
+
+r = READINESS of a WORK ITEM (an opportunity moving from raw signal to decision). It is NOT a fourth stored axis: r is a DERIVED PROJECTION of the doc-level Q profile + the decision state, computed through the locked Q-rubric. It answers one question only: 'Where does this ITEM stand in its decision lifecycle?' — which neither M (build-state of OUR tooling) nor Q (one output's content score) expresses. Naming rule: ALWAYS 'readiness (r)', NEVER 'maturity' — maturity stays reserved for M; derived phrases follow (readiness assessment, readiness milestones — never 'maturity engine').
+
+| r | name | derivation over the 12-section Opp Doc container |
+|---|---|---|
+| **opp-r0** | raw signal | Pre-doc intake state: a backlog card exists with signal + source + rough domain; no doc required, no Q derivation. Variant `r0-solution-signal` carries a problem-unknown flag. |
+| **opp-r1** | framed | Framing sections S1 Problem, S2 Strategic fit, S3 Segment, S4 Success metrics each ≥ Q2. |
+| **opp-r2** | evidence-backed | r1 AND evidence sections S5 Evidence, S6 Sizing each ≥ Q3, alternative explanations addressed. |
+| **opp-r3** | decision-ready | Doc-level conjunctive gate ≥ Q2 on the mandatory set (0,1,2,3,4,5,6,8,9,11) AND S11 carries an explicit decision from the closed set {kill / park / continue-discovery / generate-solutions} AND S8 holds 1–3 candidates. Identical to the existing promotion gate — the locked canon gate is NOT tightened. |
+
+Non-nesting note: the ladder is a set of NAMED MILESTONES on one dial, not strictly nested by construction — an r3 doc may hold S5 at Q2 without ever earning the r2 label; the gap report always names the blocking sections, so nothing is hidden.
+
+Properties: r is derived, dated, demotable — re-computed every pass from the doc via the locked Q-rubric; a later pass MAY demote it (Q is non-monotonic; a filled-but-garbage section stays Q1 and cannot fake r). Never stored as machine state. readiness ≠ priority ≠ workflow status — three separate card facets, never merged: an item can be r3-but-unimportant or r1-but-strategically-urgent.
+
+Homes: the backlog card caches r as a DATED CLAIM (`readiness: r2 (assessed 2026-07-04)`); optionally the doc's Section 0 header mirrors it. NEVER in the GitHub Project (that home belongs to M); NEVER as a second rubric (that would be a shadow Q violating single-source-of-truth).
+
+Clean-separation test for r: the descriptor is about the ITEM's position in its decision lifecycle; it could be true of a doc our tooling never touched (→ not an M descriptor); it is recomputed from the doc's Q profile and never scored independently (→ not a second quality score). sol-s0..s2 / prd-r1..r3 stay NAMED but UNDEFINED (lazy fractal) — reserved vocabulary in contracts only.

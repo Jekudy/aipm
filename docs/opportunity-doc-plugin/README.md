@@ -145,3 +145,5 @@ mvp result screen spec
 ```
 
 подробности — в [`next-steps.md`](./next-steps.md).
+
+> **SUPERSEDED (2026-07-04):** source material only. Reconciled canon = `docs/target-solution.md` + `docs/design-log/2026-07-04-reconciliation.md`; on any conflict those win.
