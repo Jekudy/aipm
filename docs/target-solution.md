@@ -80,7 +80,7 @@ Rules:
 - The ladder is a set of **named milestones on one dial, not strictly nested by construction**: an r3 doc may hold S5 at Q2 without ever earning the r2 label; the gap report always names blocking sections, so nothing is hidden.
 - r is **derived, dated, demotable**: re-computed every pass from the doc via the locked Q-rubric; cached on the backlog card as a dated claim (`readiness: r2 (assessed 2026-07-04)`); a later pass may DEMOTE it. Never stored as machine state; never in the GitHub Project (that's M); never a second rubric (that's Q).
 - **readiness ≠ priority ≠ workflow status** — three separate card facets, never merged: an item can be r3-but-unimportant or r1-but-strategically-urgent.
-- sol-s0..s2 / prd-r1..r3 stay NAMED but UNDEFINED (lazy fractal) — reserved vocabulary in contracts only.
+- sol-s0..s2 / prd-r1..r3 stay NAMED but UNDEFINED (lazy fractal) — reserved vocabulary in contracts only. **(SUPERSEDED 2026-07-07: solution-doc lvl1 collapsed these into ONE `sol-r0..sol-r3` ladder — PRD = the mature Solution Doc, one artifact. See `components/solution-doc/SPEC.md` §Readiness.)**
 
 ## 4. Router (lives in the Architecture module)
 
@@ -122,7 +122,7 @@ Options (b) AND (c) produce ONLY the empty 12-section container + white spots ma
 | 1 entry/router | Architecture module (`docs/architecture.md`) | **Этап 1, lvl1**: router-lite (intake protocol + 5 entries + dedupe + detox + refusal UX) |
 | 2 opp doc | components/opp-doc | **Этап 1, lvl1** |
 | 3 opp backlog | components/opp-backlog | **Этап 2, lvl1** = the module BUILD (intake ops, dedupe read-contract exercise, status ops). The card schema + the D-3 match-key list are AUTHORED NOW in `components/opp-backlog/SPEC.md` (single schema owner, published with this reconciliation) — Этап-1 card writes and the seeded `docs/opp-backlog.md` use THAT schema; the Этап-2 build implements it unchanged (same-list rule, D-3). |
-| 4 solution/prd | components/solution-doc | M0 stub; names reserved (sol-s0..s2, prd-r1..r3) |
+| 4 solution/prd | components/solution-doc | **M2, lvl1 built 2026-07-07**; ONE `sol-r0..sol-r3` readiness ladder (collapsed the reserved sol-s0..s2 / prd-r1..r3 split) |
 | 5 solution/prd backlog | components/solution-backlog | M0 stub; but `docs/solution-backlog.md` is a WRITE-ONLY contract target from day one (opp-doc appends promoted candidates; no consumer yet — exists for the composability acceptance criterion, decision D-2) |
 | 6 planning | components/planning | M0 stub, detailed LAST; vocabulary reserved: discovery/delivery bet, delivery_mode (experiment/mvp/rollout/full_launch/test), 5 intent types (metric, strategic_learning, capability_platform, risk_quality_compliance, business_stakeholder); "planning schedules movement of items up the readiness ladder, not tasks" |
 
