@@ -258,3 +258,15 @@ GH Project (Solution Doc M0→M2) and resolves the 3 spec-friction items; collec
 - **Editing-extensibility validated** (user asked: "are we building legacy that blocks a future active-edit/restructure stage?") — 2 independent analyses (red-team + constructive) → **EASY-TO-EXTEND**. Active editing = **lvl2** of the doc components (not a new component/mode); reuses MAP-by-question (restructure engine), the `rewrite-edit` role, the non-slop "…or restructures" checks, the Q-rubric as edit-target, and the full-inventory mutation gate. Neuroslop stays out via the founding **ABSENT (never edit) / AMBIGUOUS (editable)** line + extractive-quote provenance. Two known lvl2 additions (NOT refactors): a within-pass before/after edit-diff view; a "false-edit rate" companion to the M2→M3 false-ABSENT gate. Analyses in scratchpad task outputs.
 
 **Next:** `/reload-plugins` → live-verify `/pm-flow:solution-doc`; dogfood a real promoted candidate; collect 2 more real PRDs for the M2→M3 gate.
+
+---
+
+## 2026-07-08 · Repo push + issue backlog seeded on GitHub
+
+- **Pushed** all pending doc work to `origin/main` (commit `docs: stage-3 solution-doc lvl1 build + team-digest module + worklog`): solution-doc SPEC, STATE, team-digest SPEC, stage-1/3 hand-backs, worklog, canon touch-ups.
+- **Seeded 10 GitHub issues** in `Jekudy/aipm` — **labels-only mode**. These are work-items, deliberately kept OUT of Project #5 (which tracks module M-maturity, not tasks — putting tasks there would distort the component × M grid).
+  - lvl1 wave, priority-ordered in the titles (`[PN]`): #1 [P1] Opp Backlog on real Google Doc · #2 [P2] Sol Backlog on real Google Doc · #3 [P3] context module · #4 [P4] mandatory modules + validation + setup · #5 [P5] docs-structure sweep · #6 [P6] test on 5 PMs + feedback.
+  - epics (coarse container-discipline stubs, scope deferred): #7 lvl2 · #8 lvl3 · #9 lvl4 · #10 lvl5.
+- All issues `state/triage` (raw inbox, AC filled later). P1/P2 carry an explicit TODO to attach the real Google Doc links (not invented — no-fallbacks).
+
+**Next:** refine #1 (opp-backlog) — stage-2 handoff is ready & unblocked; attach Google Doc examples to #1/#2.
