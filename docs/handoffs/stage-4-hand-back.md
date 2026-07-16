@@ -82,7 +82,23 @@ skills/solution-backlog/references/entry-schema.md   (11 251 B; verbatim frozen 
 - `/reload-plugins` or restart → live-verify `/pm-flow:solution-backlog` v0.5.1 on the stage-4 fixtures.
 - Orchestrator: advance Solution Backlog **M0 → M2** in GH Project #5; rule on §4 canon items (F1/F5+SP4 first — they gate every fresh promotion); decide the lvl2 spec slot for the 12 wave requirements.
 - Test-harness debts for the next wave (process notes): keep `pristine/` snapshots per wave scenario (T1/T3 conversions were transcript-asserted, not byte-diffable); seed pristine dates a few days before the run date so `updated_at` refreshes are observable.
-- The commissioning handoff file `docs/handoffs/stage-4-solution-backlog-lvl1.md` contains the live sheet URL and **was committed by the orchestrator session mid-build (992e227)** — the URL of the private sheet is now in the public repo history. Orchestrator: decide whether to scrub it (rewrite/re-commit) or accept it (the sheet itself stays access-controlled).
+- ~~Sheet-URL exposure~~ — FALSE ALARM, corrected 2026-07-16: the committed handoff does NOT contain the sheet URL (it says "the orchestrator/user supplies the live link at launch"); verified by grep over the working tree AND `git log -S` over the full history — zero hits for the doc id / `docs.google` / the gid. The live link existed only in the launch chat message. No history rewrite needed.
 - M2→M3 (NOT this stage): real promoted candidates + real PRD write-backs through the live skill; blocked on adoption (Finding №0).
 
 One-line ping: «solution-backlog at M2, plugin v0.5.1: Phase-A SPEC ratified+frozen at the user gate (drift D1–D15, friction F1–F8), build smoke 5/5 + stress 6/6 + integration PASS + audits 3/3 + chief-gate SATISFIED, post-wave S2-patch verified 2/2, real-wave 4/4 spec-pass pm 6-7-7-7 fallback-mode (вкладка «решения» пуста — находка №0), spec-friction: 10 canon-side items, 6 skill-fixes proposed».
+
+---
+
+## 8. Addendum 2026-07-16 (same day): friction-fix pack applied on user-authorized unfreeze → plugin v0.6.1
+
+The user (orchestrator-owner) unfroze the writers and directed «всё остальное сделай и поправь». Applied and verified (`wf_c921d7f7-0fd`: scoped-diff check vs the 0.5.1 cache + 3 adversarial reviews 3/3 + 3 regression sims 3/3 + registration):
+
+- **RESOLVED F1/F5/F2/F6 + SP4:** opp-doc §PROMOTION + `references/task-schema.md` §4 now write the CANONICAL YAML entry (all 18 keys incl. `title ← name`, seeded lifecycle four, `sol-cand-NNN` file ids, quoted scalars, ISO dates, `sol_state` never written, `## sol-A` form explicitly retired, working-card→entry key crosswalk). **Regression R1 proved it:** a fresh promotion sim emitted a fully conforming entry (PyYAML-verified 18/18) + the opp-card `potential_solutions` back-reference (closes the wave's SP3 for the simulated path).
+- **RESOLVED F3:** additive serialization note in `docs/architecture.md#Interfaces` (content vs layout ownership; underscore key).
+- **RESOLVED (sol-doc side):** step 2 now names `decision`, canonical serialization pointer, `updated_at` refresh, surfaced-never-silent decision clears. Regression R3 PASS (demote write-back, no stale cache).
+- **SF1–SF6 applied** to solution-backlog SKILL (no-jargon scoping, transparency folded into first-write S-1 confirm, routing-correctness sol-r0 line, drift-form detect+gated-conversion read rule, id-resolution echo, comeback path). Regression R2 PASS. Word count 1923.
+- **SPEC clarifications (dated, non-breaking):** floor annotation `(promoted <date>)` blessed for ALL floor entries incl. manual O1 creates; no-jargon rule scoped to guards/prose (field names legal in S-1 inventories); sentence-initial capitalization allowance. Gate-packet F6 re-scoped to fixture-hygiene.
+- **Registered 0.5.1 → 0.6.0 → 0.6.1** (title/crosswalk hardening from review), both manifests synced each time, cache byte-verified. **Restart Claude Code to load 0.6.1.**
+- **Scope-check note (explicit waiver):** the diff vs the 0.5.1 cache also shows `.fixtures/stage-4-real-wave/` — that is this stage's own wave output (predates the fix edits), it belongs to stage-4 and stays.
+- **Still open (canon questions, NOT applied):** SP1 (decided-row tier vs admission-bearing hypothesis), SP2 (priority_data → pm_priority carry at promotion), SP3 as a written opp-doc rule (R1 covered it behaviorally; no explicit SKILL line added — smallest candidate wording recorded here), the 12 lvl2-reqs, and the sister's stage-2 §4 frictions 1–8 where not subsumed above.
+- **GH Project #5 updated:** Solution Backlog M0→M2; Opp Backlog M1→M2 (was stale since stage-2). STATE.md refreshed to Этапы 1–4 DONE.

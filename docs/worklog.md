@@ -312,3 +312,14 @@ GH Project (Solution Doc M0→M2) and resolves the 3 spec-friction items; collec
 - **Hand-back:** `docs/handoffs/stage-4-hand-back.md` (10 canon-side friction items; ТЗ stage-4 с живой ссылкой на шит НЕ закоммичено — решение оркестратору). **M2 smoke ≠ M3 gate**; M3 заблокирован находкой №0 (нет реальных промоутнутых кандидатов).
 
 **Next:** `/reload-plugins`/рестарт → live-verify `/pm-flow:solution-backlog` v0.5.1; оркестратор: Solution Backlog M0→M2 в GH #5, решения по F1/F5+SP4 (гейтят каждый свежий промоушен), слот lvl2 для 12 требований волны.
+
+---
+
+## 2026-07-16 · Post-stage-4: friction-fix pack по разморозке юзера (plugin v0.6.1) + STATE/GH sync
+
+- **Ложная тревога снята:** ссылки на приватный шит в публичном репо НЕТ и не было — проверено grep'ом по дереву и `git log -S` по всей истории (ноль вхождений doc-id / docs.google / gid). Живая ссылка была только в чат-сообщении запуска; переписывание истории не потребовалось. Ошибочное предупреждение в hand-back исправлено.
+- **Разморозка писателей (директива юзера) → фиксы применены:** opp-doc §PROMOTION + task-schema §4 → каноническая YAML-запись (18 ключей, `title ← name`, lifecycle-сеединг, sol-cand-NNN, кавычки/ISO, `sol_state` retired, `## sol-A` форма явно выведена, crosswalk ключей) — закрывает F1/F5/F2/SP4; sol-doc step-2 → decision + updated_at + surfaced-clears; канон-нота F3 в architecture.md#Interfaces; SPEC-уточнения (floor-аннотация, скоуп no-jargon); SF1–SF6 в solution-backlog SKILL.
+- **Верификация `wf_c921d7f7-0fd`:** scoped-diff vs кэш 0.5.1 (лишних ханков нет; real-wave фикстуры — свои, waived явно), ревью 3/3, регрессии 3/3 — **R1: свежий промоушен opp-doc эмитит конформную запись (PyYAML 18/18) + back-reference в potential_solutions**; R2 SF-поведения; R3 демоут write-back sol-doc. Регистрация 0.5.1→0.6.0→0.6.1 (title-hardening), кэш байт-верифай.
+- **STATE.md** обновлён (этапы 1–4 DONE, треки C/E, таблица зрелости). **GH Project #5:** Solution Backlog M0→M2 + отставший Opp Backlog M1→M2 (висел с stage-2). Hand-back дополнен аддендумом §8.
+
+**Next:** РЕСТАРТ Claude Code (0.6.1) → live-verify 4 скиллов → dogfood реального сигнала до промоушена (находка №0: вкладка «решения» пуста — цель закрыть именно этот разрыв). Открытые канон-вопросы: SP1/SP2 + lvl2-реквесты обеих волн.
