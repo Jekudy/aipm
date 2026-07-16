@@ -2,10 +2,10 @@
 
 # STATE — where are we right now
 
-_Last updated: 2026-07-05. This is the single source of truth for "what stage, which component, which tasks, which done-criteria." Update it every session._
+_Last updated: 2026-07-16. This is the single source of truth for "what stage, which component, which tasks, which done-criteria." Update it every session._
 
 ## Stage
-**Этап 1 (Wave 0): Architecture lvl1 ∥ Opp Doc lvl1 — BUILD DONE (2026-07-05), Opp Doc at M2.** Stage-1 handoff executed by a multi-agent build workflow: plugin `pm-flow` built at `~/.claude/local-plugins/pm-flow/`, registered (`pm-flow@pm-flow-marketplace` v0.1.0), 7/7 §8 smoke tests passed (prompt-simulation on mock fixtures), 3 final audits passed. Hand-back: `docs/handoffs/stage-1-hand-back.md` (spec-friction: YES — 7 items, see orchestrator task 6). **Run `/reload-plugins`** (no restart needed, Claude Code ≥2.1.195) before `/pm-flow:opp-doc` is live. **Этап 2 = Opp Backlog lvl1** (unblocked, handoff ready).
+**Этапы 1–4 BUILD DONE.** Этап 1 (2026-07-05): Architecture lvl1 + Opp Doc lvl1 → M2. Этап 2 (2026-07-12): Opp Backlog lvl1 → M2 (+ real-data волна по вкладке «возможности», S1–S4 патч v0.4.1). Этап 3 (2026-07-07): Solution Doc lvl1 → M2. **Этап 4 (2026-07-16): Solution Backlog lvl1 → M2** — двухфазно: SPEC реверс-ратифицирован из двух живых писателей и заморожен на юзер-гейте; скилл собран (v0.5.1), real-data волна в fallback-режиме (находка №0: вкладка «решения» реального шита ПУСТА — флоу останавливается до промоушена решений); плюс friction-fix pack (v0.6.0): opp-doc промоушен переведён на каноническую YAML-сериализацию, sol-doc write-back уточнён. Hand-backs: `docs/handoffs/stage-{1,2,3,4}-hand-back.md`. **Рестарт Claude Code / `/reload-plugins`** до live-инвокации свежих версий. Остался Этап 5 = Planning lvl1 (не детализирован — lazy fractal) + context-collection (строится последним).
 
 ## Canon reading order (new sessions)
 1. `docs/target-solution.md` — reviewed North-Star frame (куда идём).
@@ -24,7 +24,8 @@ The plugin exists to close three PM pains:
 ## Active tracks
 - **Track A — Architecture lvl1**: DONE incl. build — router-lite + intake protocol + transition gates are embedded in the built stage-1 skill (2026-07-05). The "M2 when embedded in the built skill" criterion is met → advance Architecture M1→M2 in GH Project.
 - **Track B — Opp Doc lvl1**: **BUILT, M2, STRESS-TESTED (v0.1.3, 2026-07-07).** Live-verified. Wave 1: 12 AF entry scenarios 12/12; wave 2 adversarial: 8/8 at 14/14, chief-orchestrator gate SATISFIED (hard promotion gate held under PM pressure; merge recommend-only held; honest demotes; false-ABSENT=0). Fix history in `docs/worklog.md`. Ingest of ≥3 real example docs still pending (M2→M3 gate).
-- **Track C — Opp Backlog lvl1 (Этап 2)**: lvl1 SPEC designed (`components/opp-backlog/SPEC.md`, card schema = single owner). Build handoff ready → `docs/handoffs/stage-2-opp-backlog-lvl1.md`. **Unblocked** — stage-1 hand-back recorded; stage-1 fixtures for reuse at `~/.claude/local-plugins/pm-flow/.fixtures/stage-1/`.
+- **Track C — Opp Backlog lvl1 (Этап 2)**: **BUILT, M2 (2026-07-12, v0.4.0; патч S1–S4 v0.4.1 2026-07-13).** Smoke 4/4, stress 5/5, chief-gate 9/9. Real-data волна по реальной вкладке «возможности» (118 строк): 12/12 spec-pass, PM-медиана ~6; 8 build-side + 7 wave-side friction. Hand-back `docs/handoffs/stage-2-hand-back.md`.
+- **Track E — Solution Backlog lvl1 (Этап 4)**: **BUILT, M2 (2026-07-16, v0.5.1→0.6.0).** SPEC `components/solution-backlog/SPEC.md` ратифицирован реверс-инженерингом двух живых писателей (drift D1–D15, friction F1–F8), заморожен на юзер-гейте. Smoke 5/5, stress 6/6 (bulk-миграция: 2 из 4 строк, ноль-райт сестры не повторился), интеграционная проверка обоих писателей PASS, chief-gate SATISFIED. Real-wave 4/4 (fallback: **вкладка «решения» пуста — находка №0**), pm 6/7/7/7. Friction-fix pack применён с разморозкой (2026-07-16): opp-doc §PROMOTION → каноническая YAML-запись + lifecycle-сеединг; sol-doc step-2 уточнён. Hand-back `docs/handoffs/stage-4-hand-back.md`.
 - **Track D — Solution Doc lvl1 (Этап 3)**: **BUILT, M2 (2026-07-07).** SPEC `components/solution-doc/SPEC.md` (10 sections S0–S9, one dial `sol-r0..r3`, approved at gate 2026-07-07). Skill `skills/solution-doc/` + a router-hook in opp-doc; plugin v0.2.0. Workflow `wf_47bc1c21-aee` (58 agents): smoke 7/7, 3 audits, stress-1 5/5, stress-2 5/5 (P6 = fixture-naming artifact), chief-gate SATISFIED. Hand-back `docs/handoffs/stage-3-hand-back.md`. **3 spec-friction open** (sol-r1 relabel — RESOLVED 2026-07-07; S7-guardrail reconcile; reserved-vocab collapse). M2→M3 = ≥3 real PRDs (1/3: «Холдирование Откликов», eval fixture). Live-verify pending `/reload-plugins`.
 
 ## Sessions (how we split work across windows)
@@ -42,10 +43,10 @@ Non-orchestrator sessions never edit STATE.md; they hand results back and the or
 |---|---|---|---|
 | Architecture & contracts | **M2** | W0 (now) | Router-lite + interfaces + gates embedded in the built stage-1 skill (2026-07-05). Mirror to GH Project. |
 | Opp Doc | **M2** | W0 (now) | Built into runnable skill `/pm-flow:opp-doc` (2026-07-05); 7/7 smoke simulated. M2→M3 gate = ≥3 real docs ingest. |
-| Opp Backlog | **M1** | Этап 2 | lvl1 SPEC hand-designed (2026-07-04): card schema, match keys, admission rules. M1→M2 = execute stage-2 handoff. GH Project: advance M0→M1. |
+| Opp Backlog | **M2** | Этап 2 | Built 2026-07-12 (`/pm-flow:opp-backlog`), real-data волна 12/12 spec-pass. GH Project advanced 2026-07-16. M2→M3 = реальный материал через LIVE-скилл. |
 | Context collection | M0 | later | Module stays M0, but the context-FILE contract is FIXED (single home: `docs/architecture.md#Interfaces`) — no refactor when the module activates. |
 | Solution Doc (→ PRD) | **M2** | Этап 3 | lvl1 BUILT 2026-07-07 (`/pm-flow:solution-doc`, plugin v0.2.0). 10-section container S0–S9; ONE readiness dial `sol-r0..r3` (collapsed the reserved sol-s0..s2 / prd-r1..r3 split). Smoke 7/7 + 2 stress waves + chief-gate SATISFIED. M2→M3 = ≥3 real PRDs (1/3). Mirror to GH Project. |
-| Solution Backlog | M0 | later | `docs/solution-backlog.md` is already a WRITE-ONLY contract target in Этап 1 (admission invariant live). |
+| Solution Backlog | **M2** | Этап 4 | Built 2026-07-16 (`/pm-flow:solution-backlog`): SPEC = single owner схемы/сериализации записи; оба писателя реконсилированы (opp-doc починен с разморозкой). M2→M3 = реальные промоутнутые кандидаты + PRD write-backs (заблокировано находкой №0: вкладка «решения» пуста). |
 | Planning | M0 | later | Reserved vocabulary: bet types, delivery_mode, 5 intent types. Detail LAST. |
 
 ## Wave 0 deadline (from 2026-07-02 grill)
@@ -75,4 +76,4 @@ Non-orchestrator sessions never edit STATE.md; they hand results back and the or
 - PRD.md waived: `docs/architecture.md#Interfaces` plays the cross-phase-contracts role.
 
 ## Next move
-Run `/reload-plugins` → live-verify `/pm-flow:opp-doc` → dogfood the user's own signal through it (deadline 16.07) → resolve spec-friction items (task 6) → stage-2 build (opp-backlog lvl1) → ingest real docs for M3 calibration.
+Рестарт Claude Code (или `/reload-plugins`) → live-verify всех четырёх скиллов (v0.6.0) → **dogfood: прогнать СВОЙ реальный сигнал opp-doc → промоушен → solution-backlog** (дедлайн 16.07 — сегодня; это же разблокирует M3-гейты и отвечает на находку №0: вкладка «решения» пуста, флоу останавливается до промоушена) → решения по остаткам spec-friction (stage-4 hand-back §4: SP1–SP3 + канонные вопросы) → Этап 5 (Planning lvl1) когда появятся prd_ready записи.
