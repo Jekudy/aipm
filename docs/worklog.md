@@ -323,3 +323,14 @@ GH Project (Solution Doc M0→M2) and resolves the 3 spec-friction items; collec
 - **STATE.md** обновлён (этапы 1–4 DONE, треки C/E, таблица зрелости). **GH Project #5:** Solution Backlog M0→M2 + отставший Opp Backlog M1→M2 (висел с stage-2). Hand-back дополнен аддендумом §8.
 
 **Next:** РЕСТАРТ Claude Code (0.6.1) → live-verify 4 скиллов → dogfood реального сигнала до промоушена (находка №0: вкладка «решения» пуста — цель закрыть именно этот разрыв). Открытые канон-вопросы: SP1/SP2 + lvl2-реквесты обеих волн.
+
+---
+
+## 2026-07-16 · WRITE wave: all 5 ops as real Google Sheets writes (R4 adapter probe, COPY only)
+
+- **Sandbox:** a full Drive COPY of the PM's real backlog spreadsheet (original read-never-write; agents never issued a write against it; `modifiedTime` verified). Adapter convention probed = the voice-note move: mandatory-core columns ADDED (opp_id / status_pmflow / readiness / source / next_step / linked_signals / updated_at at X..AD), the PM's own columns adapted-to and never overwritten (MoSCoW/RICE passthrough).
+- **Workflow `wf_515702d6-0aa`** (13 agents; Sonnet write-sims via gws, Opus cell-diff judges + zero-damage auditor): **W1 create-card / W2 update-status (declared outcome → parked, no silent new) / W3 dated demote r2→r1 under pushback / W4 append-links / W5 update-next-step — 5/5 PASS**; every write behind a cell-level S-1 inventory + scoped confirmation. **Zero-damage: PASS** — exactly 19 changed cells across the tab, all authorized; untouched rows byte-identical.
+- **Incident (recovered, most valuable finding):** `values.append` at range A1 inserted at the top/header instead of the data extent, transiently shifting the sheet and clobbering one row — fully disclosed, recovered, re-verified; final write used a bounded explicit-range update. **R4 rule: never append-at-A1; compute the next row and write a bounded range.**
+- **Adapter findings for the R4 lvl2 spec:** (1) bounded-range placement rule (the incident); (2) ops on rows without opp_id — is an un-admitted PM row a card, or must create-card admission run first (hit by W2 update-status and W4 append-links); (3) updated_at source-date ambiguity (assessed-date vs wall-clock → non-monotonic history); (4) list-field flattening ('; '-separated cell) needs an escaping/separator rule; (5) readiness claim render: short 'rX (assessed <date>)' on-sheet vs SKILL's long dash-clause example — reconcile. Report: `pm-flow/.fixtures/stage-2-real-wave/WRITE-REPORT.md`.
+
+**Next:** fold the 5 adapter findings into the R4 lvl2 spec slot together with C1–C7; the double-bookkeeping question (PM's own status column vs status_pmflow) is the honest cost of the adapter — surface it in the lvl2 design review.
