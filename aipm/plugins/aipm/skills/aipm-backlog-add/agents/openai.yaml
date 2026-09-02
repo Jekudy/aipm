@@ -1,0 +1,11 @@
+interface:
+  display_name: "Добавить в бэклог"
+  short_description: "Добавить инициативу в бэклог"
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "confluence-mcp"
+      description: "Работа с Avito Confluence"
+      transport: "streamable_http"
+      url: "https://mcp-hub.k.avito.ru/proxy/confluence-mcp/mcp"
