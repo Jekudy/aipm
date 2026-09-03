@@ -1,0 +1,11 @@
+interface:
+  display_name: "Ревью сигнала и проблемы"
+  short_description: "Проверить готовность инициативы к D1, D2 или D5"
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "confluence-mcp"
+      description: "Работа с Avito Confluence"
+      transport: "streamable_http"
+      url: "https://mcp-hub.k.avito.ru/proxy/confluence-mcp/mcp"
