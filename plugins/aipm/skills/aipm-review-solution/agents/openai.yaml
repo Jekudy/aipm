@@ -1,0 +1,11 @@
+interface:
+  display_name: "Ревью решения до PRD"
+  short_description: "Проверить, готово ли решение к фиксации (D3) или к передаче команде (D4)"
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "confluence-mcp"
+      description: "Работа с Avito Confluence"
+      transport: "streamable_http"
+      url: "https://mcp-hub.k.avito.ru/proxy/confluence-mcp/mcp"

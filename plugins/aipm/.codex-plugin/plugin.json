@@ -1,6 +1,6 @@
 {
   "name": "aipm",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Управление продуктовым бэклогом в Авито",
   "author": {
     "name": "Dmitry Kuznetsov <dvkuznetsov@avito.ru>, Evgeniy Kudryavtsev <eekudryavtsev@avito.ru>"
@@ -9,13 +9,15 @@
   "interface": {
     "displayName": "AI for PM",
     "shortDescription": "Управление бэклогом в Авито",
-    "longDescription": "Добавление и проработка элементов бэклога от сигнала до PRD",
+    "longDescription": "Добавление и проработка элементов бэклога от сигнала до PRD, аудит проработки инициативы перед выбором решения и передачей команде",
     "developerName": "Avito Product Team",
     "category": "Productivity",
     "capabilities": ["Write"],
     "defaultPrompt": [
       "Добавь инициативу в продуктовый бэклог",
-      "Синхронизируй бэклог с Google Sheets"
+      "Синхронизируй бэклог с Google Sheets",
+      "Проверь, подтверждена ли проблема в этой инициативе",
+      "Проверь, готово ли решение к передаче команде"
     ]
   }
 }
