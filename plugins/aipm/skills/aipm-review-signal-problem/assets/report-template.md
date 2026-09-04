@@ -3,7 +3,7 @@
 Первая строка ответа всегда имеет формат:
 
 ```text
-{DECISION_READY_DOSSIER | NOT_READY | BLOCKED} / {D2_CANDIDATE | CONTINUE_CANDIDATE | STOP_CANDIDATE | BLOCKED} / {достаточно | недостаточно | проверка заблокирована}
+{DECISION_READY_DOSSIER | NOT_READY | BLOCKED} / {D2_CANDIDATE | CONTINUE_CANDIDATE | STOP_CANDIDATE | BLOCKED}; candidate_available={true|false}; d5_mode={STOP|PARK|null} / {достаточно для D1 | достаточно для D2 | достаточно для Stop | достаточно для Park | недостаточно | проверка заблокирована}
 ```
 
 ## Внешний слой: только расхождения
@@ -36,11 +36,22 @@ audit:
   dossier_status: DECISION_READY_DOSSIER | NOT_READY | BLOCKED
   transition_candidate: D2_CANDIDATE | CONTINUE_CANDIDATE | STOP_CANDIDATE | BLOCKED
   canonical_transition_candidate: D2_CANDIDATE | CONTINUE_CANDIDATE | D5_STOP_CANDIDATE | D5_PARK_CANDIDATE | NO_CANDIDATE
+  candidate_available: true | false
   d5_mode: STOP | PARK | null
-  decision_outcome: OPEN_SOLUTION_DISCOVERY | CONTINUE_PROBLEM_DISCOVERY | STOP | PARK | NOT_DECIDED
+  decision_outcome: TAKE_SIGNAL_INTO_DISCOVERY | OPEN_SOLUTION_DISCOVERY | CONTINUE_PROBLEM_DISCOVERY | STOP | PARK | NOT_DECIDED
+  problem_status:
+    central_hypothesis: SUPPORTS | REFUTES | MIXED | DOES_NOT_BEAR | UNKNOWN
+    occurrence: SUPPORTS | REFUTES | MIXED | DOES_NOT_BEAR | UNKNOWN
+    reach: SUPPORTS | REFUTES | MIXED | DOES_NOT_BEAR | UNKNOWN
+    harm: SUPPORTS | REFUTES | MIXED | DOES_NOT_BEAR | UNKNOWN
+  essential_claims: {claim_id: SUPPORTS | REFUTES | MIXED | DOES_NOT_BEAR | UNKNOWN}
+  below_attention: {rule_id, result} | null
   source_coverage:
     status: COMPLETE | INCOMPLETE | NOT_ASSESSABLE
     resources: [{resource_id, locator, scope_state, review_state, required_by}]
+  claim_inventory:
+    class_counts: {NUMBER, PERCENT, MULTIPLIER_EXACT, MULTIPLIER_RHETORICAL, TIMESPAN_EXACT, TIMESPAN_DESCRIPTIVE, QUOTE, COMPARISON, INTENSIFIER, OWNER}
+  limitations: [{limitation_id, type, claim_ids, resource_ids, detail}]
   criteria:
     - {id, applicability, applicability_rule_id, assessability, result, primary_reason, anchor}
   issues:
@@ -65,7 +76,7 @@ audit:
 
 ### {YYYY-MM-DD HH:MM} — {transition}, rubric v1.0.0
 
-- Вердикт: {dossier_status} / {transition_candidate}; d5_mode={value}; решение владельца={не принято | значение}
+- Вердикт: {dossier_status} / {transition_candidate}; candidate_available={value}; d5_mode={value}; решение владельца={не принято | значение}
 - Границы: {source coverage summary}
 - Подтверждено:
   - [{criterion_instance_id}] «{дословная цитата}» — {location}; evidence={evidence_id | не требуется}
