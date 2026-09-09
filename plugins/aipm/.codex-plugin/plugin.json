@@ -1,6 +1,6 @@
 {
   "name": "aipm",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Управление продуктовым бэклогом в Авито",
   "author": {
     "name": "Dmitry Kuznetsov <dvkuznetsov@avito.ru>, Evgeniy Kudryavtsev <eekudryavtsev@avito.ru>"
