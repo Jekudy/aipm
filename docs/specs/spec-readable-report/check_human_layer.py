@@ -24,6 +24,8 @@ def violations(report: str) -> list[str]:
     bad = [t for t in CODE.findall(human) if t not in ALLOWED]
     bad += CRIT.findall(human)
     bad += [w for w in FORBIDDEN if w in human.lower() and not (w == "машинн" and human.lower().count("машинн") <= human.lower().count("в машинном слое"))]
+    if not re.search(r"^## Проверка: \S", human, re.M):
+        bad.append("нет заголовка «## Проверка: {название}»")
     lines = [l for l in human.strip().splitlines() if l.strip()]
     if len(lines) > MAX_LINES:
         bad.append(f"строк без машинного слоя: {len(lines)} > {MAX_LINES}")
