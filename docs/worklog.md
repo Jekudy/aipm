@@ -37,10 +37,18 @@
 
 **Next:** вычитка владельцем 11 разборов → правки формата/рубрики по замечаниям → PR в main.
 
-## 2026-09-10 · AVT-13: relocation and branch-safe startup
+## 2026-09-10 · AVT-13: local project relocation
 
-- Moved the complete repository under Growth, retaining its name, Git origin, BB IDs, both old-path aliases, and all preceding branch commits.
-- Kept local attachments excluded from Git and verified the full backup and original file hashes. No remote publication occurred.
-- Added only branch-local canonical context, navigation and registrations for the existing shared SessionStart validator. Existing plugin/spec bytes and all previous worklog entries are preserved.
+- Moved the complete repository under Growth, retaining the project name, Git origin, existing branches and worktrees, and BB project/source IDs.
+- Preserved both old-path aliases for existing sessions and references. Kept local attachments excluded from Git; nothing was published.
+- Verified the full local backup, original file hashes, Git refs and indices, worktree access through both paths, and the unchanged owner-branch worklog.
+- Prepared navigation and canonical context on a dedicated migration branch. Existing worktree HEADs and plugin content were not changed; SessionStart hooks were not activated.
+
+**Next:** review and adopt the migration context without replacing existing worktree context, then perform the separately authorized startup check.
+
+## 2026-09-10 · AVT-13: branch-safe startup registration
+
+- Authorized additive context-only commits for main and both existing feature worktrees; all preceding commits and plugin/spec bytes are retained.
+- Registered the existing shared SessionStart validator in each checkout with its own local canonical files and root alias. No loader or plugin implementation changed.
 
 **Next:** verify static old/new-path startup checks, then the single authorized fresh Codex main startup.
