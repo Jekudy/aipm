@@ -36,3 +36,11 @@
 - **Демо-инструкция** выдана владельцу: тред A как главный пример, живой запуск на D (D5, 4–6 минут), промпты для обоих скиллов.
 
 **Next:** вычитка владельцем 11 разборов → правки формата/рубрики по замечаниям → PR в main.
+
+## 2026-09-10 · AVT-13: relocation and branch-safe startup
+
+- Moved the complete repository under Growth, retaining its name, Git origin, BB IDs, both old-path aliases, and all preceding branch commits.
+- Kept local attachments excluded from Git and verified the full backup and original file hashes. No remote publication occurred.
+- Added only branch-local canonical context, navigation and registrations for the existing shared SessionStart validator. Existing plugin/spec bytes and all previous worklog entries are preserved.
+
+**Next:** verify static old/new-path startup checks, then the single authorized fresh Codex main startup.
