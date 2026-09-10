@@ -26,3 +26,12 @@
 - **Дрейф и правки:** три отчёта из пяти потеряли название документа в заголовке → правило в обоих шаблонах и проверка в скрипте. I заблокирован по недоступным источникам, но писал «Проверка не началась» и перечислял препятствия → в глоссарии BLOCKED разведён на «по входу» (один вопрос) и «по источникам» («Проверить нельзя без …», блоки остаются).
 - **Наблюдение по методике:** прогоны идут на локальных экспортах с закрытыми ссылками, поэтому документы, чьи доказательства живут в дашбордах, упираются в «источники не переданы». Это не дефект формата; для боевого использования скилл читает Confluence и дочерние страницы сам.
 - **Итог по issue #12:** success signal спеки достигнут на 11 реальных документах. PR #13 готов к мержу. Открыт один вопрос по рубрике: правило DB-09 (C, «Дальнейшие планы» как commitment).
+
+## 2026-09-10 · AVT-13: local project relocation
+
+- Moved the complete repository under Growth, retaining the project name, Git origin, existing branches and worktrees, and BB project/source IDs.
+- Preserved both old-path aliases for existing sessions and references. Kept local attachments excluded from Git; nothing was published.
+- Verified the full local backup, original file hashes, Git refs and indices, worktree access through both paths, and the unchanged owner-branch worklog.
+- Prepared navigation and canonical context on a dedicated migration branch. Existing worktree HEADs and plugin content were not changed; SessionStart hooks were not activated.
+
+**Next:** review and adopt the migration context without replacing existing worktree context, then perform the separately authorized startup check.
