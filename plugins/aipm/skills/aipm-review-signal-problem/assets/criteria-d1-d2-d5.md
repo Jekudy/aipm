@@ -60,6 +60,7 @@ criterion_instance:
 | REL-ESS-01 | D2, 2 instances | Central problem связан отдельно с reach и harm: тот же phenomenon или evidence-required bridge. |
 | REL-01 | Если `count(left)>1` или `count(right)>1` | Явно связаны нужные signal, hypothesis, problem, reach и outcome claims без неоднозначного co-reference. |
 | ER-01 | D2 evidence-required essentials; D5 evidence reason | Для claim есть конкретный source reference; «по данным» без ссылки не проходит. |
+| ER-02 | D2 evidence-required essentials; D5 evidence reason | Источник evidence relation включён в supplied manifest (`scope_state=IN_SCOPE`) и прочитан (`review_state=READ`): `ASSESSABLE`, `MET`, anchor содержит дословную цитату из источника, locator и `evidence_id`. Иначе `BLOCKED(BLOCKED_SOURCE)`, `result: null`; содержательное соответствие наблюдения claim проверяет ER-03, включая честное опровержение. |
 | ER-03 | D2 evidence-required essentials; D5 evidence reason | В источнике есть цитируемое наблюдение с совпадающими scope, period, grain и value, включая direction. |
 | INF-DISC-01 | Если `D2 AND decision_role=ESSENTIAL AND inference_required=true` | Для claim задан наблюдаемый результат, при котором claim не поддерживается. |
 | INF-METHOD-01 | D2 evidence-required essentials | Versioned method profile допускает claim type и содержит все required fields. |
