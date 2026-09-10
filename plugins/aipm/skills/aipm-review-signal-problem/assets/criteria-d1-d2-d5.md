@@ -87,7 +87,7 @@ criterion_instance:
 
 ## Минимальные runtime-правила
 
-1. **Preflight.** `DB-01`: transition явно `D1|D2|D5`; `DB-02`: track явно `discovery`; `DB-03`: ровно один независимый decision thread; `DB-09`: следующий commitment не дороже перехода, а D2 разрешает только bounded Solution Discovery. Нарушение блокирует оценку, но не создаёт content `NOT_MET`.
+1. **Preflight.** `DB-01`: transition явно `D1|D2|D5`; `DB-02`: track явно `discovery`; `DB-03`: ровно один независимый decision thread; `DB-09`: следующий commitment не дороже перехода, а D2 разрешает только bounded Solution Discovery. Commitment — только явно заявленный следующий шаг или решение (Decision Brief, поле «Следующий шаг», «Решение»); пункты разделов «Дальнейшие планы», «Идеи», «Что можно сделать» без заявленного решения commitment не считаются. При сомнении не блокируй, а запиши issue с действием «понизить заявленное решение». Явное нарушение блокирует оценку, но не создаёт content `NOT_MET`.
 2. **Central claim.** Единственная problem hypothesis становится central автоматически. При нескольких без явного focus — `BLOCKED(CENTRAL_CLAIM_UNRESOLVED)`.
 3. **Manifest.** Корневой locator, явно переданный пользователем, получает `IN_SCOPE`. Для каждого дополнительного ресурса обязательны `resource_id`, locator и `scope_state: IN_SCOPE|OUT_OF_SCOPE|UNRESOLVED`; runtime заполняет `required_by`. Не обходить ссылки рекурсивно. Ref вне manifest получает synthetic `{scope_state: UNRESOLVED, review_state: UNAVAILABLE}`.
 4. **ER-02 assessability.** Evidence relation проверяема только при `scope_state=IN_SCOPE` и `review_state=READ`; иначе `BLOCKED(BLOCKED_SOURCE)`. Missing/invalid scope state даёт также preflight `BLOCKED(INVALID_INPUT)`.
