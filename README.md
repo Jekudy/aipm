@@ -29,8 +29,14 @@ Source: user/root thread `thr_4qem5ekfpp`, AVT-13 EXECUTE authorization.
 
 The explicit chain is AIPM → Growth → Avito → Vibe. `CLAUDE.md` is canonical and `AGENTS.md` is its alias. No `.bb/AGENTS.md` is used.
 
-The relocation prepares context on `infra/avt-13-growth-context`; main and the two original worktrees keep their original HEADs. AIPM SessionStart hooks are not activated by this change. Old worktrees do not have this new leaf canon: never inject main's file as a substitute. Hook activation and fresh startup acceptance require a separate, worktree-safe step; manual validation alone does not prove native delivery.
+Both `.claude/settings.json` and `.codex/hooks.json` register the existing shared Avito SessionStart validator. Each existing branch has its own local canonical files; no branch substitutes main's canon. Context-only commits preserve all earlier feature commits and plugin/spec content. Static checks validate routes and budget; actual native delivery is recorded separately in the AVT-13 handoff.
 
 ## Historical sources
 
 Commit `3d0f370` removed the old design documents on 2026-09-02; their previous versions remain in `3d0f370^`. The current plugin tree is authoritative for implemented skill behavior. The global `pm-flow` plugin is a separate legacy implementation and is not relocated or reinstalled by AVT-13.
+
+Shared validator (uses this checkout):
+
+```sh
+python3 ~/Vibe/work/avito/scripts/context-startup.py --cwd "$PWD" --provider codex
+```
