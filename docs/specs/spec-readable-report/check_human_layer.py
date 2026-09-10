@@ -15,12 +15,15 @@ CRIT = re.compile(r"\b(?:DB|S|P|V|REL|ER|INF|CONF|Q|R|ST)-[A-Z0-9-]+\b|\bD[34]\.
 # ponytail: аббревиатуры домена, разрешённые в прозе; расширять по итогам прогонов
 ALLOWED = {"PRD", "MVP", "SQL", "PF", "SLA", "API", "KYC", "AB", "KILL", "HIGH"}
 MAX_LINES = 25
+# ponytail: жаргон, утекавший в калибровке 2026-09-10; расширять по прогонам
+FORBIDDEN = ("атом", "assets/", "шапка воздействий", "manifest", "машинн")
 
 
 def violations(report: str) -> list[str]:
     human = QUOTE.sub("«…»", DETAILS.sub("", report))
     bad = [t for t in CODE.findall(human) if t not in ALLOWED]
     bad += CRIT.findall(human)
+    bad += [w for w in FORBIDDEN if w in human.lower() and not (w == "машинн" and human.lower().count("машинн") <= human.lower().count("в машинном слое"))]
     lines = [l for l in human.strip().splitlines() if l.strip()]
     if len(lines) > MAX_LINES:
         bad.append(f"строк без машинного слоя: {len(lines)} > {MAX_LINES}")
@@ -37,6 +40,7 @@ def demo() -> None:
         "<details><summary>Машинный слой</summary>\naudit:\n  dossier_status: NOT_READY\n</details>"
     )
     assert violations(new) == [], violations(new)
+    assert violations(new + "\nЧто сделать: дописать недостающие атомы"), "жаргон должен ловиться"
     print("self-check OK")
 
 
