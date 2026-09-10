@@ -35,3 +35,10 @@
 - Prepared navigation and canonical context on a dedicated migration branch. Existing worktree HEADs and plugin content were not changed; SessionStart hooks were not activated.
 
 **Next:** review and adopt the migration context without replacing existing worktree context, then perform the separately authorized startup check.
+
+## 2026-09-10 · AVT-13: branch-safe startup registration
+
+- Authorized additive context-only commits for main and both existing feature worktrees; all preceding commits and plugin/spec bytes are retained.
+- Registered the existing shared SessionStart validator in each checkout with its own local canonical files and root alias. No loader or plugin implementation changed.
+
+**Next:** verify static old/new-path startup checks, then the single authorized fresh Codex main startup.
