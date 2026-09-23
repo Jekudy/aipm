@@ -30,17 +30,19 @@ def normalize(text):
     return text.strip().lower()
 
 def fragments(cell):
-    cell = re.sub(r"\((?:стр|с|lines?|строки?)\.?\s*[^)]*\)", " ", cell)  # locators
+    # locators: "(стр. 12)", "(с 5)", "(lines 10-20)" — keyword must be
+    # followed by a number, otherwise "(сделать меньше)" is eaten too
+    cell = re.sub(r"\((?:стр|с|lines?|строки?)\.?\s*[\d–—-][^)]*\)", " ", cell)
     cell = cell.strip()
     if cell.startswith(("не найдено", "родитель")):
         return []
-    quoted = re.findall(r"[«\"]([^«»\"]+)[»\"]", cell)
+    quoted = re.findall(r"[«\"'“]([^«»\"'”]+)[»\"'”]", cell)
     parts = quoted if quoted else [cell]
     out = []
     for p in parts:
         for frag in re.split(r"…|\.\.\.| — | — ", p):
             frag = normalize(frag)
-            if len(frag) >= 15:  # ignore crumbs too short to be evidence
+            if len(frag) >= 3:  # short verbatim quotes (numbers, codes) count too
                 out.append(frag)
     return out
 
@@ -100,7 +102,10 @@ def main():
           f"битых цитат: {len(bad)} | одинаковых цитат: {len(dupq)}")
     # self-test
     assert normalize("« Доля  заказов»") == normalize("\"доля заказов\""), "normalize"
-    assert fragments('«кот»') == [], "crumb filter"
+    assert fragments('«кот»') == ["кот"], "short quote must be checked, not dropped"
+    assert fragments('(сделать меньше)') == ["сделать меньше"], \
+        "non-locator parenthesis must survive"
+    assert fragments('«текст» (стр. 12)') == ["текст"], "locator must be stripped"
     assert len(expected) > 0, "checklist IDs not parsed"
 
 if __name__ == "__main__":
