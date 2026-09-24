@@ -31,16 +31,18 @@ def normalize(text):
 
 def fragments(cell):
     # locators: "(стр. 12)", "(с 5)", "(lines 10-20)" — keyword must be
-    # followed by a number, otherwise "(сделать меньше)" is eaten too
-    cell = re.sub(r"\((?:стр|с|lines?|строки?)\.?\s*[\d–—-][^)]*\)", " ", cell)
+    # followed by a digit, otherwise "(сделать меньше)" and "(с-гордостью)"
+    # are eaten too
+    cell = re.sub(r"\((?:стр|с|lines?|строки?)\.?\s*\d[^)]*\)", " ", cell)
     cell = cell.strip()
     if cell.startswith(("не найдено", "родитель")):
         return []
-    quoted = re.findall(r"[«\"'“]([^«»\"'”]+)[»\"'”]", cell)
-    parts = quoted if quoted else [cell]
+    # pair-aware: an apostrophe inside «…», "…" or “…” is part of the quote
+    quoted = re.findall(r"«([^«»]+)»|“([^“”]+)”|\"([^\"]+)\"|'([^']+)'", cell)
+    parts = [g for tup in quoted for g in tup if g] if quoted else [cell]
     out = []
     for p in parts:
-        for frag in re.split(r"…|\.\.\.| — | — ", p):
+        for frag in re.split(r"…|\.\.\.| — ", p):
             frag = normalize(frag)
             if len(frag) >= 3:  # short verbatim quotes (numbers, codes) count too
                 out.append(frag)
@@ -106,6 +108,12 @@ def main():
     assert fragments('(сделать меньше)') == ["сделать меньше"], \
         "non-locator parenthesis must survive"
     assert fragments('«текст» (стр. 12)') == ["текст"], "locator must be stripped"
+    assert fragments("'фрагмент в одинарных'") == ["фрагмент в одинарных"], \
+        "single-quoted quote"
+    assert fragments("«l'objet trouvé»") == ["lobjet trouvé"], \
+        "apostrophe inside «…» must not split the quote"
+    assert fragments('(с-гордостью)') == ["с гордостью"], \
+        "hyphenated word is not a locator"
     assert len(expected) > 0, "checklist IDs not parsed"
 
 if __name__ == "__main__":
