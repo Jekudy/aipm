@@ -10,6 +10,7 @@ Help the PM leave with a usable PRD or a precise list of changes to one. Work in
 ## Establish the source
 
 - Read the owning project's document rules, current PRD, linked decisions, relevant flows, and sources needed for the request. Treat old drafts and unverified claims as historical, not current product behavior.
+- Keep each document's canonical URL exactly as supplied by the user or returned in the source's `url` field. Do not reconstruct it from a page ID, truncate its title, or substitute an unverified `short_url`. Correct stale links in current navigation; preserve historical snapshots.
 - When review comments matter, fetch the full thread, including replies and resolved comments. Compare reply IDs as well as top-level comment IDs when identifying changes. Keep quoted anchors and exact requests in working notes. Distinguish a deletion request, an editorial suggestion, a changed decision, and a reopened question. A later explicit decision supersedes an older one; a discussion does not settle a value.
 - Ask only about a material gap that cannot be resolved from the documents or the user's direction. Continue work that does not depend on the answer. Never invent product scope, priorities, metric values, or a decision owner.
 
@@ -28,7 +29,10 @@ Help the PM leave with a usable PRD or a precise list of changes to one. Work in
 - Follow the document's existing tables, labels, order, and density. Where useful, put requirement, criterion, priority, and open status together in one table. Merge overlapping risks in the existing risk table and update mitigations when the mechanism changes. Retain units, dates, and sources for metrics; do not present projected impact as measured impact.
 - If the PM authorized changes to the working document, re-read it immediately before each edit batch and preserve concurrent changes. For Confluence, use the current storage XHTML, check unique edit anchors and XML validity, compare body as well as version, then re-read the published page to verify tables, links, and consistency. Keep edit tokens and response headers out of Git and snapshots.
 - Reconcile each requested comment as implemented, already satisfied, superseded by a newer instruction, or still awaiting a named decision. Resolving or replying to comments is a separate action and requires its own authorization.
+- When replies are authorized, answer in the original thread with the concrete document change and its section or requirement ID. Distinguish an implemented edit from a decision that remains open. Read back the replies; leave comment status unchanged unless closing it was also requested.
 
 ## Finish
 
 State what changed or what the audit found, cite the document evidence, and name only decisions that remain open. Verify claims against the final document. Keep case-specific channels, timings, values, and scope decisions in that PRD, not in this reusable skill.
+
+Before posting a handoff with Confluence links, save its exact text to a temporary file. For each Confluence page referenced, take its canonical URL from the source. If it has a `/spaces/.../pages/{id}/{title}` path, run `python3 scripts/check_document_links.py '<canonical-url>' '<text-file>'` from this skill's directory. Fix every failure before posting. The check compares links with the source URL; it does not test network access. Run `python3 scripts/check_document_links.py --self-test` when changing the checker.
