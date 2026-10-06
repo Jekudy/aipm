@@ -1,0 +1,4 @@
+interface:
+  display_name: "do-PRD"
+  short_description: "Аудит PRD и помощь в написании документа"
+  default_prompt: "Используй $do-prd для аудита PRD или помощи в написании и обновлении документа по согласованным решениям."
