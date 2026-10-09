@@ -44,11 +44,11 @@ The stages, stories and processes below come from the brief. Each process has it
 
 1. Оператор запрашивает отчёт по выбранному файлу.
 
-Если отчёт создан, он содержит дату создания и число строк в выбранном файле.
+Успешный исход: создан отчёт с датой создания и числом строк в выбранном файле.
 
 | ID | Критерий приёмки | Приоритет |
 | --- | --- | --- |
-| D-03 | Если отчёт создан, он содержит дату создания и число строк в выбранном файле. | 1 |
+| D-03 | Оператор может создать отчёт по файлу, который прошёл проверку. Созданный отчёт содержит дату создания и число строк в выбранном файле. | 1 |
 
 Открытый вопрос: что получает оператор, если отчёт не удалось создать?
 
@@ -74,18 +74,61 @@ The failure question limits acceptance of that branch; the fragment does not pro
 
 ### Bad for this requested block: disconnected collections
 
+The following block keeps the same stories, actions, branches and criteria. Only their grouping changes.
+
 ```markdown
 ## Все пользовательские истории
-История оператора. История аналитика.
+
+### Этап 1. Подготовка отчёта
+
+Оператор хочет проверить файл и создать отчёт, чтобы найти ошибки до передачи результата аналитику.
+
+### Этап 2. Получение результата
+
+Аналитик хочет скачать выбранный отчёт, чтобы поделиться результатом с коллегами.
 
 ## Все процессы
-Проверка файла. Создание отчёта. Скачивание отчёта.
+
+### БП 1. Проверка файла
+
+Начало: оператор выбрал файл для проверки.
+
+1. Оператор загружает выбранный файл.
+2. Система показывает результат проверки.
+
+- Если ошибок нет, файл доступен для создания отчёта. Оператор может перейти к БП 2.
+- Если найдены ошибки, оператор видит номер строки и описание ошибки. Такой файл недоступен для создания отчёта.
+
+### БП 2. Создание отчёта
+
+Начало: выбранный файл прошёл проверку.
+
+1. Оператор запрашивает отчёт по выбранному файлу.
+
+Успешный исход: создан отчёт с датой создания и числом строк в выбранном файле.
+
+Открытый вопрос: что получает оператор, если отчёт не удалось создать?
+
+### БП 3. Скачивание отчёта
+
+Начало: доступен готовый отчёт.
+
+1. Аналитик выбирает готовый отчёт.
+2. Аналитик скачивает выбранный отчёт.
+
+Открытый вопрос: как долго хранить отчёты?
 
 ## Все требования
-Общая таблица D-01–D-04.
+
+| ID | Критерий приёмки | Приоритет |
+| --- | --- | --- |
+| D-01 | Если файл проходит проверку, он доступен для создания отчёта. | 1 |
+| D-02 | Если проверка находит ошибку, оператор видит номер строки и описание ошибки. Такой файл недоступен для создания отчёта. | 1 |
+| D-03 | Оператор может создать отчёт по файлу, который прошёл проверку. Созданный отчёт содержит дату создания и число строк в выбранном файле. | 1 |
+| D-04 | Скачанный файл содержит выбранный готовый отчёт. | 1 |
 ```
 
-The selected stage order and process/table pairs disappear. The reader must reconstruct the associations. This is not a universal ban on a flat table: preserve one if the PM chose it or a scoped edit does not authorize restructuring.
+The example separates stages from processes and processes from their tables. The reader must reconstruct the associations. This is not a universal ban on flat tables. Preserve one if the PM chose it or a scoped edit does not authorize restructuring.
 
 ## 2. User story
 
@@ -109,7 +152,7 @@ The action is clear, but the brief does not support this motive. A well-formed t
 
 ### Good
 
-Use the format of BP 1 above: a named process, initial state, numbered observable actions, explicit validation branches and the adjacent invariant table. Keep one action per numbered step. Describe process behavior; do not command the developer to implement it.
+Use BP 1 above as the model. Keep its named process, initial state, numbered observable actions, validation branches and adjacent invariant table. Keep one action per numbered step. Describe process behavior. Do not turn its description into a development assignment.
 
 The failed-validation branch ends without report creation. The successful branch names the next available process. The table contains the pass/fail conditions; the flow explains their order and connection.
 
@@ -148,7 +191,7 @@ For example, an error message without a row number fails D-02. So does allowing 
 | Любой загруженный файл доступен для создания отчёта. | It contradicts the agreed failed-validation exception. |
 | Проверка реализована отдельным сервисом, который отвечает за 10 секунд. | It adds an unchosen architecture and deadline instead of the selected result. |
 
-Do not duplicate the same meaning in “Requirement” and “Acceptance” columns. Use ID plus the combined criterion; add a selected or requested priority. An unknown value remains open, even if filling it would make the sentence easier to test.
+Do not duplicate the same meaning in “Requirement” and “Acceptance” columns. Use ID plus the combined criterion. Add a selected or requested priority. An unknown value remains open, even if filling it would make the sentence easier to test.
 
 ### Selected research uses the same acceptance logic
 
